@@ -35,7 +35,12 @@ namespace Chain
 
         public void LoopLinks(int amountOfLoops)
         {
-            throw new NotImplementedException();
+            int i = 0;
+            while (i < amountOfLoops)
+            {
+                i++;
+                RunLinks();
+            }
         }
 
         public void RunLinks()
