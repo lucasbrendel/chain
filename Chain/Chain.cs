@@ -45,7 +45,15 @@ namespace Chain
 
         public void RunLinks()
         {
-            throw new NotImplementedException();
+            foreach (ILink link in _Links)
+            {
+                if(link.IsEnabled)
+                {
+                    link.HookBeforeLink();
+                    link.RunLink();
+                    link.HookAfterLink();
+                }
+            }
         }
     }
 }
