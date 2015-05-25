@@ -20,6 +20,8 @@ namespace Chain
         bool IsEnabled { get; set; }
         LinkResult Result { get; }
         void RunLink();
+        void HookBeforeLink();
+        void HookAfterLink();
     }
 
     public class Link : ILink
@@ -42,6 +44,17 @@ namespace Chain
         }
 
         public void RunLink()
+        {
+            throw new NotImplementedException();
+        }
+
+
+        public void HookBeforeLink()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void HookAfterLink()
         {
             throw new NotImplementedException();
         }
