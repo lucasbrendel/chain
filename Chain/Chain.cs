@@ -10,7 +10,7 @@ namespace Chain
     {
         IList<ILink> Links { get; }
         void ConnectAllLinks();
-        void LoopLinks();
+        void LoopLinks(int amountOfLoops);
         void RunLinks();
     }
 
@@ -33,7 +33,7 @@ namespace Chain
             throw new NotImplementedException();
         }
 
-        public void LoopLinks()
+        public void LoopLinks(int amountOfLoops)
         {
             throw new NotImplementedException();
         }
