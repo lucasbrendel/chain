@@ -38,4 +38,3 @@ namespace Chain
         public abstract void OnLinkAborted(ILink link);
     }
 }
-
