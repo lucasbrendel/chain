@@ -26,15 +26,20 @@ namespace Chain
 
     public class Link : ILink
     {
+        private bool _IsEnabled;
+
         public bool IsEnabled
         {
             get
             {
-                throw new NotImplementedException();
+                return _IsEnabled;
             }
             set
             {
-                throw new NotImplementedException();
+                if(value != _IsEnabled)
+                {
+                    _IsEnabled = value;
+                }
             }
         }
 
