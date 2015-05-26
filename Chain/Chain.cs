@@ -12,6 +12,7 @@ namespace Chain
         void ConnectAllLinks();
         void LoopLinks(int amountOfLoops);
         void RunLinks();
+        void AddLink(ILink link);
     }
 
     public class Chain : IChain
@@ -20,12 +21,12 @@ namespace Chain
 
         public Chain()
         {
-
+            _Links = new List<ILink>();
         }
 
         public IList<ILink> Links
         {
-            get { throw new NotImplementedException(); }
+            get { return _Links; }
         }
 
         public void ConnectAllLinks()
@@ -54,6 +55,12 @@ namespace Chain
                     link.HookAfterLink();
                 }
             }
+        }
+
+
+        public void AddLink(ILink link)
+        {
+            _Links.Add(link);
         }
     }
 }
