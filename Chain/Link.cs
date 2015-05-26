@@ -28,6 +28,12 @@ namespace Chain
     {
         private bool _IsEnabled;
 
+        
+        public Link()
+        {
+            IsEnabled = true;
+        }
+
         public bool IsEnabled
         {
             get
@@ -36,16 +42,11 @@ namespace Chain
             }
             set
             {
-                if(value != _IsEnabled)
+                if (value != _IsEnabled)
                 {
                     _IsEnabled = value;
                 }
             }
-        }
-
-        public Link()
-        {
-            IsEnabled = true;
         }
 
         public LinkResult Result
