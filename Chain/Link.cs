@@ -43,6 +43,11 @@ namespace Chain
             }
         }
 
+        public Link()
+        {
+            IsEnabled = true;
+        }
+
         public LinkResult Result
         {
             get { throw new NotImplementedException(); }
