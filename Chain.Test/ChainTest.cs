@@ -15,6 +15,7 @@ namespace Chain.Test
             Chain chain = new Chain();
 
             Assert.AreEqual(0, chain.Links.Count);
+            
             chain.AddLink(link);
 
             Assert.AreEqual(1, chain.Links.Count);
