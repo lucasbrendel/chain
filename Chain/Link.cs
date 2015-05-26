@@ -24,7 +24,7 @@ namespace Chain
         void HookAfterLink();
     }
 
-    public class Link : ILink
+    public abstract class Link : ILink
     {
         private bool _IsEnabled;
 
@@ -53,20 +53,10 @@ namespace Chain
             get { throw new NotImplementedException(); }
         }
 
-        public void RunLink()
-        {
-            throw new NotImplementedException();
-        }
+        public abstract void RunLink();
 
+        public abstract void HookBeforeLink();
 
-        public void HookBeforeLink()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void HookAfterLink()
-        {
-            throw new NotImplementedException();
-        }
+        public abstract void HookAfterLink();
     }
 }
