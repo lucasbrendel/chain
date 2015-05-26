@@ -27,7 +27,7 @@ namespace Chain
     public abstract class Link : ILink
     {
         private bool _IsEnabled;
-
+        private LinkResult _Result;
         
         public Link()
         {
@@ -51,7 +51,14 @@ namespace Chain
 
         public LinkResult Result
         {
-            get { throw new NotImplementedException(); }
+            get { return _Result; }
+            protected set
+            {
+                if(value != _Result)
+                {
+                    _Result = value;
+                }
+            }
         }
 
         public abstract void RunLink();
