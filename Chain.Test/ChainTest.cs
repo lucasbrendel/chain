@@ -22,18 +22,39 @@ namespace Chain.Test
         }
 
         [TestMethod]
+        public void AddHookTest()
+        {
+            IHook hook = Substitute.For<IHook>();
+
+            Chain chain = new Chain();
+
+            Assert.AreEqual(0, chain.Hooks.Count);
+
+            chain.AddHook(hook);
+
+            Assert.AreEqual(1, chain.Hooks.Count);
+            Assert.AreEqual(hook, chain.Hooks[0]);
+        }
+
+        [TestMethod]
         public void RunLinksWithEnabledLinkTest()
         {
             ILink link = Substitute.For<Link>();
+            IHook hook = Substitute.For<Hook>();
 
             Chain chain = new Chain();
             chain.AddLink(link);
+            chain.AddHook(hook);
 
             chain.RunLinks();
 
+            hook.Received(1).OnChainStart(chain);
+            hook.Received(1).OnLinkStart(link);
             link.Received(1).HookBeforeLink();
             link.Received(1).RunLink();
             link.Received(1).HookAfterLink();
+            hook.Received(1).OnLinkEnd(link);
+            hook.Received(1).OnChainEnd(chain);
         }
 
         [TestMethod]
