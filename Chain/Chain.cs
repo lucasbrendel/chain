@@ -9,19 +9,22 @@ namespace Chain
     public interface IChain
     {
         IList<ILink> Links { get; }
-        void ConnectAllLinks();
+        IList<IHook> Hooks { get; }
         void LoopLinks(int amountOfLoops);
         void RunLinks();
         void AddLink(ILink link);
+        void AddHook(IHook hook);
     }
 
     public class Chain : IChain
     {
         private IList<ILink> _Links;
+        private IList<IHook> _Hooks;
 
         public Chain()
         {
             _Links = new List<ILink>();
+            _Hooks = new List<IHook>();
         }
 
         public IList<ILink> Links
@@ -29,9 +32,9 @@ namespace Chain
             get { return _Links; }
         }
 
-        public void ConnectAllLinks()
+        public IList<IHook> Hooks
         {
-            throw new NotImplementedException();
+            get { return _Hooks; }
         }
 
         public void LoopLinks(int amountOfLoops)
@@ -46,14 +49,50 @@ namespace Chain
 
         public void RunLinks()
         {
+            RunHookBeforeChain();
             foreach (ILink link in _Links)
             {
-                if(link.IsEnabled)
+                if (link.IsEnabled)
                 {
+                    RunHookStartLink(link);
                     link.HookBeforeLink();
                     link.RunLink();
                     link.HookAfterLink();
+                    RunHookAfterLink(link);
                 }
+            }
+            RunHookAfterChain();
+        }
+
+        private void RunHookAfterChain()
+        {
+            foreach(IHook hook in _Hooks)
+            {
+                hook.OnChainEnd(this);
+            }
+        }
+
+        private void RunHookAfterLink(ILink link)
+        {
+            foreach(IHook hook in _Hooks)
+            {
+                hook.OnLinkEnd(link);
+            }
+        }
+
+        private void RunHookStartLink(ILink link)
+        {
+            foreach(IHook hook in _Hooks)
+            {
+                hook.OnLinkStart(link);
+            }
+        }
+
+        private void RunHookBeforeChain()
+        {
+            foreach(IHook hook in _Hooks)
+            {
+                hook.OnChainStart(this);
             }
         }
 
@@ -61,6 +100,11 @@ namespace Chain
         public void AddLink(ILink link)
         {
             _Links.Add(link);
+        }
+
+        public void AddHook(IHook hook)
+        {
+            _Hooks.Add(hook);
         }
     }
 }
