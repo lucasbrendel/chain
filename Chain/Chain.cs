@@ -8,6 +8,7 @@ namespace Chain
 {
     public interface IChain
     {
+        string Name { get; set; }
         IList<ILink> Links { get; }
         IList<IHook> Hooks { get; }
         void LoopLinks(int amountOfLoops);
@@ -18,6 +19,7 @@ namespace Chain
 
     public class Chain : IChain
     {
+        private string _Name;
         private IList<ILink> _Links;
         private IList<IHook> _Hooks;
 
@@ -27,9 +29,28 @@ namespace Chain
             _Hooks = new List<IHook>();
         }
 
+        public Chain(string name)
+        {
+            _Name = name;
+            _Links = new List<ILink>();
+            _Hooks = new List<IHook>();
+        }
+
         public IList<ILink> Links
         {
             get { return _Links; }
+        }
+
+        public string Name
+        {
+            get { return _Name; }
+            set
+            {
+                if(value != _Name)
+                {
+                    _Name = value;
+                }
+            }
         }
 
         public IList<IHook> Hooks
